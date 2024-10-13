@@ -63,7 +63,15 @@ namespace SoundChecker.ViewModels
                 return;
             }
 
-            soundPlayer.PlayMp3(param.FileInfo.FullName);
+            switch (param.FileInfo.Extension.ToLower())
+            {
+                case ".mp3":
+                    soundPlayer.PlayMp3(param.FileInfo.FullName);
+                    break;
+                case ".ogg":
+                    soundPlayer.PlayOgg(param.FileInfo.FullName);
+                    break;
+            }
         });
 
         public void Dispose()
