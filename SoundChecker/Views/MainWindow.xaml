@@ -23,5 +23,7 @@
             Grid.Row="0"
             Margin="1"
             Text="{Binding CurrentDirectoryPath}" />
+
+        <ListBox Grid.Row="1" ItemsSource="{Binding Files}" />
     </Grid>
 </Window>
