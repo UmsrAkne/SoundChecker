@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO.Abstractions;
 using System.Linq;
+using Prism.Ioc;
 using Prism.Mvvm;
 using SoundChecker.Models;
 
@@ -11,12 +12,19 @@ namespace SoundChecker.ViewModels
     // ReSharper disable once ClassNeverInstantiated.Global
     public class MainWindowViewModel : BindableBase
     {
+        private IFileSystem fileSystem;
         private string currentDirectoryPath;
         private ObservableCollection<ExtendedFileInfo> files = new ();
 
         public MainWindowViewModel()
         {
             SetDummies();
+        }
+
+        public MainWindowViewModel(IContainerProvider containerRegistry)
+        {
+            SetDummies();
+            fileSystem = containerRegistry.Resolve<IFileSystem>();
         }
 
         public TextWrapper TextWrapper { get; } = new ();

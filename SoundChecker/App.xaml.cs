@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.IO.Abstractions;
+using System.Windows;
 using Prism.Ioc;
 using SoundChecker.Views;
 
@@ -16,6 +17,7 @@ namespace SoundChecker
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.RegisterSingleton<IFileSystem, FileSystem>();
         }
     }
 }
