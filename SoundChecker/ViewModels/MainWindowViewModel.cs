@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO.Abstractions;
 using System.Linq;
+using Prism.Commands;
 using Prism.Ioc;
 using Prism.Mvvm;
 using SoundChecker.Models;
@@ -10,8 +12,9 @@ using SoundChecker.Models;
 namespace SoundChecker.ViewModels
 {
     // ReSharper disable once ClassNeverInstantiated.Global
-    public class MainWindowViewModel : BindableBase
+    public class MainWindowViewModel : BindableBase, IDisposable
     {
+        private readonly SoundPlayer soundPlayer = new ();
         private IFileSystem fileSystem;
         private string currentDirectoryPath;
         private ObservableCollection<ExtendedFileInfo> files = new ();
@@ -51,6 +54,27 @@ namespace SoundChecker.ViewModels
         {
             get => files;
             set => SetProperty(ref files, value);
+        }
+
+        public DelegateCommand<ExtendedFileInfo> PlaySoundCommand => new DelegateCommand<ExtendedFileInfo>((param) =>
+        {
+            if (param == null || !param.IsSoundFile())
+            {
+                return;
+            }
+
+            soundPlayer.PlayMp3(param.FileInfo.FullName);
+        });
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            soundPlayer.Dispose();
         }
 
         private IEnumerable<ExtendedFileInfo> GetFiles(string targetDirectoryPath)

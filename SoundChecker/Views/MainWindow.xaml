@@ -31,6 +31,13 @@
             AlternationCount="2"
             ItemsSource="{Binding Files}">
 
+            <ListBox.InputBindings>
+                <KeyBinding
+                    Key="Return"
+                    Command="{Binding PlaySoundCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListBox}, Path=SelectedItem}" />
+            </ListBox.InputBindings>
+
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
                     <Style.Triggers>
