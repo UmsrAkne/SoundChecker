@@ -45,11 +45,11 @@ namespace SoundChecker.ViewModels
         [Conditional("DEBUG")]
         private void SetDummies()
         {
-            Files.Add(new ExtendedFileInfo(new FileSystem().FileInfo.New("test1.ogg")));
-            Files.Add(new ExtendedFileInfo(new FileSystem().FileInfo.New("test2.ogg")));
-            Files.Add(new ExtendedFileInfo(new FileSystem().FileInfo.New("test3.ogg")));
-            Files.Add(new ExtendedFileInfo(new FileSystem().FileInfo.New("test4.ogg")));
-            Files.Add(new ExtendedFileInfo(new FileSystem().FileInfo.New("test5.ogg")));
+            Files.Add(new ExtendedFileInfo(new FileSystem().FileInfo.New("test1.ogg")) { Comment = "Comment1", });
+            Files.Add(new ExtendedFileInfo(new FileSystem().FileInfo.New("test2.ogg")) { Comment = "Comment1", });
+            Files.Add(new ExtendedFileInfo(new FileSystem().FileInfo.New("test3.ogg")) { Comment = "Comment1", });
+            Files.Add(new ExtendedFileInfo(new FileSystem().FileInfo.New("test4.ogg")) { Comment = "Comment1", });
+            Files.Add(new ExtendedFileInfo(new FileSystem().FileInfo.New("test5.ogg")) { Comment = string.Empty, });
         }
     }
 }
