@@ -1,6 +1,8 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO.Abstractions;
+using System.Linq;
 using Prism.Mvvm;
 using SoundChecker.Models;
 
@@ -33,6 +35,7 @@ namespace SoundChecker.ViewModels
                 }
 
                 CurrenDirectoryInfo = new FileSystem().DirectoryInfo.New(currentDirectoryPath);
+                Files = new ObservableCollection<ExtendedFileInfo>(GetFiles(currentDirectoryPath));
             }
         }
 
@@ -40,6 +43,12 @@ namespace SoundChecker.ViewModels
         {
             get => files;
             set => SetProperty(ref files, value);
+        }
+
+        private IEnumerable<ExtendedFileInfo> GetFiles(string targetDirectoryPath)
+        {
+            var filePaths = new FileSystem().Directory.GetFiles(targetDirectoryPath);
+            return filePaths.Select(p => new ExtendedFileInfo(new FileSystem().FileInfo.New(p)));
         }
 
         [Conditional("DEBUG")]
