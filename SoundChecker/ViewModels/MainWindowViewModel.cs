@@ -66,10 +66,10 @@ namespace SoundChecker.ViewModels
             switch (param.FileInfo.Extension.ToLower())
             {
                 case ".mp3":
-                    soundPlayer.PlayMp3(param.FileInfo.FullName);
+                    soundPlayer.PlayMp3(param);
                     break;
                 case ".ogg":
-                    soundPlayer.PlayOgg(param.FileInfo.FullName);
+                    soundPlayer.PlayOgg(param);
                     break;
             }
         });
@@ -94,7 +94,7 @@ namespace SoundChecker.ViewModels
         [Conditional("DEBUG")]
         private void SetDummies()
         {
-            Files.Add(new ExtendedFileInfo(new FileSystem().FileInfo.New("test1.ogg")) { Comment = "Comment1", });
+            Files.Add(new ExtendedFileInfo(new FileSystem().FileInfo.New("test1.ogg")) { Comment = "Comment1", Playing = true, });
             Files.Add(new ExtendedFileInfo(new FileSystem().FileInfo.New("test2.ogg")) { Comment = "Comment1", });
             Files.Add(new ExtendedFileInfo(new FileSystem().FileInfo.New("test3.ogg")) { Comment = "Comment1", });
             Files.Add(new ExtendedFileInfo(new FileSystem().FileInfo.New("test4.ogg")) { Comment = "Comment1", });

@@ -52,11 +52,27 @@
                 <DataTemplate DataType="{x:Type models:ExtendedFileInfo}">
                     <Grid>
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="20" />
                             <ColumnDefinition Width="0.5*" />
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="{Binding FileInfo.Name}" />
-                        <TextBlock Grid.Column="1" Text="{Binding Comment}" />
+                        <TextBlock Grid.Column="0">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Playing}" Value="true">
+                                            <Setter Property="Text" Value="▶" />
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding Playing}" Value="false">
+                                            <Setter Property="Text" Value="" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                        <TextBlock Grid.Column="1" Text="{Binding FileInfo.Name}" />
+                        <TextBlock Grid.Column="2" Text="{Binding Comment}" />
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
