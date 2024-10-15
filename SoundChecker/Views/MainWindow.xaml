@@ -14,7 +14,12 @@
     Height="350"
     d:DataContext="{d:DesignInstance viewModels:MainWindowViewModel}"
     prism:ViewModelLocator.AutoWireViewModel="True"
+    AllowDrop="True"
     mc:Ignorable="d">
+
+    <i:Interaction.Behaviors>
+        <behaviors:DragAndDropBehavior />
+    </i:Interaction.Behaviors>
 
     <Window.InputBindings>
         <KeyBinding
