@@ -56,6 +56,8 @@ namespace SoundChecker.ViewModels
             set => SetProperty(ref files, value);
         }
 
+        public TagGen TagGen { get; } = new ();
+
         public DelegateCommand<ExtendedFileInfo> PlaySoundCommand => new DelegateCommand<ExtendedFileInfo>((param) =>
         {
             if (param == null || !param.IsSoundFile())
