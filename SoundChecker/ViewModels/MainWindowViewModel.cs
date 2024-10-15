@@ -60,6 +60,8 @@ namespace SoundChecker.ViewModels
 
         public TagGen TagGen { get; } = new ();
 
+        public ObservableCollection<string> ClipboardHistory { get; } = new ();
+
         public DelegateCommand<ExtendedFileInfo> PlaySoundCommand => new DelegateCommand<ExtendedFileInfo>((param) =>
         {
             if (param == null || !param.IsSoundFile())
@@ -86,7 +88,13 @@ namespace SoundChecker.ViewModels
             }
 
             TagGen.FileName = Path.GetFileNameWithoutExtension(param.FileInfo.FullName);
-            Clipboard.SetText(TagGen.GetTag());
+            var text = TagGen.GetTag();
+            Clipboard.SetText(text);
+
+            if (ClipboardHistory.Count == 0 || ClipboardHistory.FirstOrDefault() != text)
+            {
+                ClipboardHistory.Insert(0, text);
+            }
         });
 
         public void Dispose()
