@@ -16,6 +16,14 @@
     prism:ViewModelLocator.AutoWireViewModel="True"
     mc:Ignorable="d">
 
+    <Window.InputBindings>
+        <KeyBinding
+            Key="C"
+            Command="{Binding CopyTagCommand}"
+            CommandParameter="{Binding ElementName=ListBox, Path=SelectedItem}"
+            Modifiers="Control" />
+    </Window.InputBindings>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -131,7 +139,7 @@
                 HorizontalAlignment="Right"
                 Command="{Binding CopyTagCommand}"
                 CommandParameter="{Binding ElementName=ListBox, Path=SelectedItem}"
-                Content="Copy" />
+                Content="Copy ( Ctrl + C )" />
 
         </StackPanel>
 
