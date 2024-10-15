@@ -81,7 +81,11 @@
                             </TextBlock>
 
                             <TextBlock Grid.Column="1" Text="{Binding FileInfo.Name}" />
-                            <TextBlock Grid.Column="2" Text="{Binding Comment}" />
+
+                            <TextBox
+                                Grid.Column="2"
+                                Opacity="0.8"
+                                Text="{Binding Comment}" />
                         </Grid>
                     </ContentControl>
 
