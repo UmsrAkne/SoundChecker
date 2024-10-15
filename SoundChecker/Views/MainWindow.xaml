@@ -20,6 +20,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <TextBox
@@ -28,6 +29,7 @@
             Text="{Binding CurrentDirectoryPath}" />
 
         <ListBox
+            x:Name="ListBox"
             Grid.Row="1"
             HorizontalContentAlignment="Stretch"
             AlternationCount="2"
@@ -98,5 +100,29 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+
+        <StackPanel Grid.Row="2" Margin="2">
+            <DockPanel>
+                <TextBlock Margin="2,0" Text="Template Text :" />
+                <TextBox Text="{Binding TagGen.TemplateText}" />
+            </DockPanel>
+
+            <Border Height="0" Margin="2" />
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Margin="2,0" Text="Repeat Count :" />
+                <TextBox Width="100" Text="{Binding TagGen.RepeatCount, UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+
+            <Button
+                Margin="2"
+                Padding="20,0"
+                HorizontalAlignment="Right"
+                Command="{Binding CopyTagCommand}"
+                CommandParameter="{Binding ElementName=ListBox, Path=SelectedItem}"
+                Content="Copy" />
+
+        </StackPanel>
+
     </Grid>
 </Window>
