@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.IO;
 using System.IO.Abstractions;
 using System.Linq;
+using System.Text.Json;
 using System.Windows;
 using Prism.Commands;
 using Prism.Ioc;
@@ -107,6 +108,11 @@ namespace SoundChecker.ViewModels
             Clipboard.SetText(param);
         });
 
+        public DelegateCommand SaveJsonCommand => new (() =>
+        {
+            var jsonString = JsonSerializer.Serialize(Files, new JsonSerializerOptions { WriteIndented = true, });
+            fileSystem.File.WriteAllText("fileInfos.json", jsonString);
+        });
 
         public void Dispose()
         {
