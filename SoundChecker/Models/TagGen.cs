@@ -5,7 +5,6 @@ namespace SoundChecker.Models
     public class TagGen : BindableBase
     {
         private string templateText;
-        private string fileName;
         private int repeatCount;
 
         public TagGen()
@@ -15,7 +14,7 @@ namespace SoundChecker.Models
 
         public string TemplateText { get => templateText; set => SetProperty(ref templateText, value); }
 
-        public string FileName { get => fileName; set => SetProperty(ref fileName, value); }
+        public string FileName { get; set; }
 
         public int RepeatCount { get => repeatCount; set => SetProperty(ref repeatCount, value); }
 

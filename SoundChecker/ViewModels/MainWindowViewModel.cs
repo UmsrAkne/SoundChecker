@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.IO;
 using System.IO.Abstractions;
 using System.Linq;
+using System.Windows;
 using Prism.Commands;
 using Prism.Ioc;
 using Prism.Mvvm;
@@ -74,6 +76,17 @@ namespace SoundChecker.ViewModels
                     soundPlayer.PlayOgg(param);
                     break;
             }
+        });
+
+        public DelegateCommand<ExtendedFileInfo> CopyTagCommand => new DelegateCommand<ExtendedFileInfo>((param) =>
+        {
+            if (param == null)
+            {
+                return;
+            }
+
+            TagGen.FileName = Path.GetFileNameWithoutExtension(param.FileInfo.FullName);
+            Clipboard.SetText(TagGen.GetTag());
         });
 
         public void Dispose()
