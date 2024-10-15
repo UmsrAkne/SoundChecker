@@ -9,7 +9,7 @@ namespace SoundChecker.Models
         private readonly WaveOutEvent waveOut;
         private Mp3FileReader mp3FileReader;
         private VorbisWaveReader vorbisWaveReader;
-        private ExtendedFileInfo playingFileInfo = null;
+        private ExtendedFileInfo playingFileInfo;
 
         public SoundPlayer()
         {
