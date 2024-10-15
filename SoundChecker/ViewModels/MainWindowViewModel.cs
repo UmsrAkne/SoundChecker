@@ -97,6 +97,17 @@ namespace SoundChecker.ViewModels
             }
         });
 
+        public DelegateCommand<string> CopyTagFromHistoryCommand => new DelegateCommand<string>((param) =>
+        {
+            if (string.IsNullOrWhiteSpace(param))
+            {
+                return;
+            }
+
+            Clipboard.SetText(param);
+        });
+
+
         public void Dispose()
         {
             Dispose(true);

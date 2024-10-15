@@ -102,7 +102,15 @@
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <ListBox Grid.Row="2" ItemsSource="{Binding ClipboardHistory}" />
+        <ListBox Grid.Row="2" ItemsSource="{Binding ClipboardHistory}">
+            <ListBox.InputBindings>
+                <KeyBinding
+                    Key="C"
+                    Command="{Binding CopyTagFromHistoryCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListBox}, Path=SelectedItem}"
+                    Modifiers="Control" />
+            </ListBox.InputBindings>
+        </ListBox>
 
         <StackPanel Grid.Row="3" Margin="2">
             <DockPanel>
