@@ -34,7 +34,7 @@ namespace SoundChecker.Models
         [Conditional("RELEASE")]
         private void SetVersion()
         {
-            Version = "20241013" + "a";
+            Version = "20241015" + "a";
         }
 
         [Conditional("DEBUG")]
