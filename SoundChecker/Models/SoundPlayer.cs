@@ -14,7 +14,6 @@ namespace SoundChecker.Models
         public SoundPlayer()
         {
             waveOut = new WaveOutEvent();
-
             waveOut.PlaybackStopped += (_, _) =>
             {
                 if (playingFileInfo == null)
@@ -30,11 +29,7 @@ namespace SoundChecker.Models
 
         public void PlayMp3(ExtendedFileInfo extendedFileInfo)
         {
-            if (playingFileInfo != null)
-            {
-                playingFileInfo.Playing = false;
-                waveOut.Stop();
-            }
+            Stop();
 
             playingFileInfo = extendedFileInfo;
             playingFileInfo.Playing = true;
@@ -45,11 +40,7 @@ namespace SoundChecker.Models
 
         public void PlayOgg(ExtendedFileInfo extendedFileInfo)
         {
-            if (playingFileInfo != null)
-            {
-                playingFileInfo.Playing = false;
-                waveOut.Stop();
-            }
+            Stop();
 
             playingFileInfo = extendedFileInfo;
             playingFileInfo.Playing = true;
@@ -68,6 +59,19 @@ namespace SoundChecker.Models
             mp3FileReader.Dispose();
             vorbisWaveReader.Dispose();
             waveOut.Dispose();
+        }
+
+        private void Stop()
+        {
+            if (playingFileInfo != null)
+            {
+                playingFileInfo.Playing = false;
+                playingFileInfo = null;
+            }
+
+            waveOut.Stop();
+            vorbisWaveReader?.Dispose();
+            mp3FileReader?.Dispose();
         }
     }
 }
