@@ -16,13 +16,16 @@ namespace SoundChecker.Models
             waveOut = new WaveOutEvent();
             waveOut.PlaybackStopped += (_, _) =>
             {
-                if (playingFileInfo == null)
+                if (waveOut.PlaybackState != PlaybackState.Stopped)
                 {
                     return;
                 }
 
-                playingFileInfo.Playing = false;
-                waveOut.Stop();
+                if (playingFileInfo != null)
+                {
+                    playingFileInfo.Playing = false;
+                }
+
                 playingFileInfo = null;
             };
         }
@@ -72,6 +75,8 @@ namespace SoundChecker.Models
             waveOut.Stop();
             vorbisWaveReader?.Dispose();
             mp3FileReader?.Dispose();
+            vorbisWaveReader = null;
+            mp3FileReader = null;
         }
     }
 }
